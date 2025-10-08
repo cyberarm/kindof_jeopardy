@@ -1,0 +1,16 @@
+{
+  "categories":
+   [
+    {
+      "name": "One",
+      "category_guessable": false,
+      "questions": [
+        {
+          "type": "text", // image, song, sound, text, spotify_song
+          "points": 2,
+          "value": "String goes here."
+        }
+      ]
+    }
+   ]
+}
