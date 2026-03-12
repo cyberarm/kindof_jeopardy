@@ -3,6 +3,7 @@ begin
 rescue LoadError
   require "cyberarm_engine"
 end
+require "json"
 
 require_relative "lib/version"
 require_relative "lib/theme"
