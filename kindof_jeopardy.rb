@@ -12,14 +12,19 @@ require_relative "lib/state"
 require_relative "lib/states/main_menu"
 require_relative "lib/states/quiz_select_menu"
 require_relative "lib/states/pause_menu"
+require_relative "lib/states/setup_game"
 require_relative "lib/states/game"
 
-module Jeopardy
+module CyberarmEngine
+  GUI_DEBUG = false
+end
+
+module KindOfJeopardy
   DEBUG = true
 end
 
-if Jeopardy::DEBUG
-  Jeopardy::Window.new(width: 1280, height: 800, fullscreen: false, resizable: true).show
+if KindOfJeopardy::DEBUG
+  KindOfJeopardy::Window.new(width: 1280, height: 800, fullscreen: false, resizable: true).show
 else
-  Jeopardy::Window.new(width: Gosu.screen_width, height: Gosu.screen_height, fullscreen: true, resizable: true).show
+  KindOfJeopardy::Window.new(width: Gosu.screen_width, height: Gosu.screen_height, fullscreen: true, resizable: true).show
 end

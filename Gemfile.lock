@@ -1,0 +1,23 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    cyberarm_engine (0.25.1)
+      gosu (~> 1.1)
+    gosu (1.4.6)
+    json (2.19.3)
+
+PLATFORMS
+  ruby
+  x86_64-linux
+
+DEPENDENCIES
+  cyberarm_engine
+  json
+
+CHECKSUMS
+  cyberarm_engine (0.25.1)
+  gosu (1.4.6)
+  json (2.19.3)
+
+BUNDLED WITH
+  4.0.8

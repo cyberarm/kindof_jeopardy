@@ -1,9 +1,9 @@
-module Jeopardy
+module KindOfJeopardy
   class State < CyberarmEngine::GuiState
     def setup
       self.show_cursor = true
 
-      theme(Jeopardy::THEME)
+      theme(KindOfJeopardy::THEME)
     end
   end
 end

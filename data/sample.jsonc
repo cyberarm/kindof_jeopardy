@@ -4,7 +4,7 @@
   "answer_timeout": -1,
   "categories": [
     {
-      "name": "One",
+      "name": "Abbreviations\nand\nAcronyms",
       "label": null,
       "value": null,
       "hint": null,
@@ -13,35 +13,35 @@
         {
           "type": "text", // image, song, sound, text, spotify_song
           "points": 2,
-          "label": "1",
+          "label": "$200",
           "value": "String goes here.",
           "hint": null
         },
         {
           "type": "text", // image, song, sound, text, spotify_song
           "points": 2,
-          "label": "2",
+          "label": "$400",
           "value": "String goes here.",
           "hint": null
         },
         {
           "type": "text", // image, song, sound, text, spotify_song
           "points": 2,
-          "label": "3",
+          "label": "$600",
           "value": "String goes here.",
           "hint": null
         },
         {
           "type": "text", // image, song, sound, text, spotify_song
           "points": 4,
-          "label": "4",
+          "label": "$800",
           "value": "String goes here.",
           "hint": null
         },
         {
           "type": "text", // image, song, sound, text, spotify_song
           "points": 6,
-          "label": "5",
+          "label": "$1,000",
           "value": "String goes here.",
           "hint": null
         }
