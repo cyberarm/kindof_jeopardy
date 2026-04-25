@@ -3,3 +3,5 @@ source "https://rubygems.org"
 
 gem "cyberarm_engine"
 gem "json"
+gem "faker"
+gem "async-websocket"

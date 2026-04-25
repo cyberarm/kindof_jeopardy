@@ -12,12 +12,11 @@ module KindOfJeopardy
           button "Setup Game", width: 1.0, margin_top: LARGE_PADDING do
             pop_state
             push_state(States::SetupGame)
-            # push_state(States::QuizSelectMenu)
           end
 
-          button "Quiz Editor", width: 1.0, margin_top: PADDING do
+          button "Category Editor", width: 1.0, margin_top: PADDING do
             pop_state
-            push_state(States::QuizEditor)
+            push_state(States::CategoryEditorMenu)
           end
 
           button "Exit to Desktop", width: 1.0, margin_top: LARGE_PADDING do

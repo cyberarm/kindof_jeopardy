@@ -1,12 +1,11 @@
 module KindOfJeopardy
-  ROOT_PATH = Dir.pwd
-
   QUARTER_PADDING = 5
   HALF_PADDING = 10
   PADDING = 20
   LARGE_PADDING = 40
 
   GAME_BACKGROUND = [0xaa_1a5fb4, 0x44_1a5fb4, 0x44_1a5fb4, 0xaa_1a5fb4]
+  QUESTION_BACKGROUND = 0xee_1a5fb4
   GAME_BUTTON_BACKGROUND = 0xaa_1a5fb4
   GAME_BUTTON_BACKGROUND_HOVER = 0xff_1a5fb4
   GAME_BUTTON_BACKGROUND_ACTIVE = 0x88_1a5fb4
@@ -15,6 +14,10 @@ module KindOfJeopardy
   NINE_SLICE_EDGE = 4
 
   THEME = {
+    Element: {
+      background_nine_slice_from_edge: NINE_SLICE_EDGE,
+      background_nine_slice_mode: :stretched
+    },
     TextBlock: {
       text_static: true,
       font: "#{ROOT_PATH}/media/fonts/NotoSans-Regular.ttf"
@@ -37,9 +40,7 @@ module KindOfJeopardy
       border_thickness: 0,
       margin: QUARTER_PADDING,
       background_nine_slice: NINE_SLICE_BACKGROUND,
-      background_nine_slice_from_edge: NINE_SLICE_EDGE,
       background_nine_slice_color: 0xaa_ff8800,
-      background_nine_slice_mode: :stretched,
       background: 0,
       hover: {
         background: 0
@@ -50,6 +51,9 @@ module KindOfJeopardy
       disabled: {
         background: 0
       }
+    },
+    ToggleButton: {
+      checkmark: "Yes"
     },
     jeopardy_header: {
       padding: HALF_PADDING,

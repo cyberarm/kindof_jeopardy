@@ -1,26 +1,55 @@
 module KindOfJeopardy
   class States
     class Game < KindOfJeopardy::State
+      Team = Data.define(:name, :color)
+      Category = Data.define(:name, :description, :questions)
+      Question = Data.define(:type, :label, :value, :hint)
+      Turn = Data.define(:category, :row, :team_attempts, :accepted_team, :time)
+
+      Context = Data.define(:teams, :categories, :options, :turns)
+
       def setup
         super
 
-        @data = JSON.parse(File.read("./data/sample.jsonc"), symbolize_names: true)
+        @context = @options[:context]
+        # FIXME: don't overwrite the categories, once we have real categories to work with xD
+        @context.categories.each_with_index do |cat, i|
+          @context.categories[i] = Category.new(
+            "Super Secret",
+            "",
+            [
+              Question.new("text", "ZERO", "VALUE", "HINT"),
+              Question.new("text", "ZERO", "VALUE", "HINT"),
+              Question.new("text", "ZERO", "VALUE", "HINT"),
+              Question.new("text", "ZERO", "VALUE", "HINT"),
+              Question.new("text", "ZERO", "VALUE", "HINT")
+            ]
+          )
+        end
 
         flow(width: 1.0, height: 1.0, padding: HALF_PADDING, background: GAME_BACKGROUND) do
-          6.times do
-            cat = @data[:categories].first
-            # @data[:categories].each do |cat|
-              stack(fill: true, height: 1.0) do
-                # category
-                button(cat[:name].to_s.upcase, width: 1.0, fill: true, style_class: [:jeopardy_button, :jeopardy_header], margin_bottom: HALF_PADDING) do
-                end
+          @context.categories.each do |category|
+            next unless category
 
-                # quiz item
-                cat[:questions].each do |question|
-                  button question[:label].to_s, width: 1.0, fill: true, style_class: [:jeopardy_button], enabled: rand > 0.5
+            stack(fill: true, height: 1.0) do
+              # category
+              guessable = @context.options[:categories_guessable]
+              button(guessable ? "?" : category.name.to_s.upcase, width: 1.0, fill: true, style_class: (guessable ? [:jeopardy_button] : [:jeopardy_button, :jeopardy_header]), margin_bottom: HALF_PADDING) do |btn|
+                next unless guessable
+
+                btn.enabled = false
+                dialog(QuestionDialog, question: question, button: btn)
+              end
+
+              # quiz item
+              category.questions.each_with_index do |question, i|
+                # question.label.to_s
+                button @context.options[:"answer_score_row_#{i + 1}"] * @context.options[:score_multiplier], width: 1.0, fill: true, style_class: [:jeopardy_button] do |btn|
+                  btn.enabled = false
+                  dialog(QuestionDialog, question: question, button: btn)
                 end
               end
-            # end
+            end
           end
         end
       end

@@ -1,10 +1,8 @@
 module KindOfJeopardy
   class States
-    class PauseMenu < CyberarmEngine::Dialog
+    class PauseMenu < KindOfJeopardy::Dialog
       def setup
         super
-
-        theme(THEME)
 
         background 0xee_353535
 
