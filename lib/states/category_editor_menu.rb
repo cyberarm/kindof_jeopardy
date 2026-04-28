@@ -11,6 +11,7 @@ module KindOfJeopardy
             banner "Category Editor Menu", width: 1.0, text_align: :center
 
             button "Create Category", width: 1.0, margin_top: LARGE_PADDING do
+              pop_state
               push_state(States::CategoryEditor)
             end
 
@@ -29,12 +30,23 @@ module KindOfJeopardy
             end
 
             stack(width: 1.0, fill: true, scroll: true, margin_top: LARGE_PADDING) do
-              75.times do |i|
-                button "CATEGORY: #{i}", width: 1.0
+              available_categories.each do |category|
+                button category.name, width: 1.0
               end
             end
           end
         end
+      end
+
+      def available_categories
+        categories = []
+
+        Dir.glob("#{ROOT_PATH}/data/*.json").sort_by { |a| a.downcase }.each do |file|
+          categories << JSON.parse(File.read(file))
+        rescue JSON::ParserError
+        end
+
+        categories
       end
     end
   end

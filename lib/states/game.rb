@@ -1,12 +1,54 @@
 module KindOfJeopardy
   class States
     class Game < KindOfJeopardy::State
-      Team = Data.define(:name, :color)
-      Category = Data.define(:name, :description, :questions)
-      Question = Data.define(:type, :label, :value, :hint)
-      Turn = Data.define(:category, :row, :team_attempts, :accepted_team, :time)
+      Team = Struct.new(:name, :color) do
+        def self.from_json(hash)
+          Team.new(**hash)
+        end
 
-      Context = Data.define(:teams, :categories, :options, :turns)
+        def to_json(context = nil)
+          to_h.to_json(context)
+        end
+      end
+      Category = Struct.new(:name, :description, :questions) do
+        def self.from_json(hash)
+          raise NotImplementedError
+        end
+
+        def to_json(context = nil)
+          to_h.to_json(context)
+        end
+      end
+      Question = Struct.new(:type, :uri, :question, :answer, :host_context) do
+        def self.from_json(hash)
+          Question.new(**hash)
+        end
+
+        def to_json(context = nil)
+          to_h.to_json(context)
+        end
+      end
+
+      # ID of category from Context, row index of question, array of
+      Turn = Struct.new(:category_id, :row, :team_attempts, :accepted_team, :time) do
+        def self.from_json(hash)
+          raise NotImplementedError
+        end
+
+        def to_json(context = nil)
+          to_h.to_json(context)
+        end
+      end
+
+      Context = Struct.new(:teams, :categories, :options, :turns) do
+        def self.from_json(hash)
+          raise NotImplementedError
+        end
+
+        def to_json(context = nil)
+          to_h.to_json(context)
+        end
+      end
 
       def setup
         super

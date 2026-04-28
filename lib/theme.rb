@@ -35,6 +35,13 @@ module KindOfJeopardy
     Tagline: {
       font: "#{ROOT_PATH}/media/fonts/NotoSans-Black.ttf"
     },
+    ToolTip: {
+      text_size: 24,
+      border_thickness: 0,
+      background_nine_slice: NINE_SLICE_BACKGROUND,
+      background_nine_slice_color: 0xee_3d3846,
+      background: 0,
+    },
     Button: {
       font: "#{ROOT_PATH}/media/fonts/NotoSans-Black.ttf",
       text_align: :center,
