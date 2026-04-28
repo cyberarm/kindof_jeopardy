@@ -15,6 +15,7 @@ module KindOfJeopardy
 
   THEME = {
     Element: {
+      design_width: 2650.0,
       background_nine_slice_from_edge: NINE_SLICE_EDGE,
       background_nine_slice_mode: :stretched
     },
@@ -43,10 +44,14 @@ module KindOfJeopardy
       background_nine_slice_color: 0xaa_ff8800,
       background: 0,
       hover: {
-        background: 0
+        color: 0x88_000000,
+        background: 0,
+        background_nine_slice_color: 0xee_ff8800,
       },
       active: {
-        background: 0
+        color: 0xaa_000000,
+        background: 0,
+        background_nine_slice_color: 0x88_ff8800,
       },
       disabled: {
         background: 0
@@ -55,6 +60,12 @@ module KindOfJeopardy
     ToggleButton: {
       checkmark: "Yes"
     },
+    Menu: {
+      border_thickness: 0,
+      border_color: 0
+    },
+
+    # custom style "classes"
     jeopardy_header: {
       padding: HALF_PADDING,
       text_wrap: :word_wrap,

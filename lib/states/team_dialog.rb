@@ -4,6 +4,7 @@ module KindOfJeopardy
       def setup
         super
 
+        @context = @options[:context]
         @team = @options[:team]
 
         background 0xee_353535
@@ -13,13 +14,30 @@ module KindOfJeopardy
 
           stack(width: 1.0, fill: true, scroll: true) do
             title "Team Name"
-            @team_name = edit_line @team&.name || random_team_name, width: 1.0
+            flow(width: 1.0) do
+              @team_name = edit_line @team&.name || random_team_name, fill: true
+              @team_name.subscribe(:changed) do
+                if @context.teams.select { |t| !t.nil? && t != @team }.any? { |t| t.name.downcase.strip == @team_name.value.downcase.strip }
+                  @accept_button.enabled = false
+                  # FIXME:
+                  @team_name.style.background_nine_slice_color = TEAM_COLORS["red"]
+                  @team_name.stylize
+                else
+                  @accept_button.enabled = true
+                end
+              end
+              # FIXME: Show refresh icon and add tooltip
+              button(get_image("#{ROOT_PATH}/media/kenney/board-game-icons/card_rotate.png"), image_height: 32) do
+                @team_name.value = random_team_name
+              end
+            end
 
             title "Team Color", margin_top: PADDING
             color_name = @team&.color || random_team_color
-            @team_color = button color_name, background_nine_slice_color: TEAM_COLORS[color_name], width: 1.0 do |btn|
-              menu(parent: btn) do
-                TEAM_COLORS.each do |name, color|
+            colors = available_colors
+            @team_color = button color_name, background_nine_slice_color: colors[color_name], width: 1.0 do |btn|
+              menu(parent: btn, width: 1.0) do
+                colors.each do |name, color|
                   menu_item(name, background_nine_slice_color: color) do
                     btn.value = name
                     btn.style.background_nine_slice_color = color
@@ -28,7 +46,7 @@ module KindOfJeopardy
               end.show
             end
 
-            button "Accept", width: 1.0, margin_top: LARGE_PADDING do
+            @accept_button = button "Accept", width: 1.0, margin_top: LARGE_PADDING do
               pop_state
               @options[:callback]&.call(Game::Team.new(@team_name.value, @team_color.value))
             end
@@ -48,19 +66,29 @@ module KindOfJeopardy
 
       def random_team_name
         [
+          Faker::Space.star,
+          Faker::Creature::Animal.name.capitalize,
           Faker::Movies::StarWars.droid,
-          Faker::Movies::StarWars.call_sign,
-          Faker::Movies::StarWars.vehicle,
-          Faker::Movies::Hobbit.character,
-          Faker::Movies::Hobbit.location,
-          Faker::Movies::LordOfTheRings.character,
-          Faker::Movies::LordOfTheRings.location,
           Faker::Superhero.name
         ].sample
       end
 
+      def available_colors
+        h = {}
+
+        TEAM_COLORS.each do |key, value|
+          # select colors that other teams aren't using,
+          # exclude current team so we can correctly display and 'select' chosen color
+          next if @context.teams.select { |t| !t.nil? }.any? { |t| t.color == key && t != @team }
+
+          h[key] = value
+        end
+
+        h
+      end
+
       def random_team_color
-        TEAM_COLORS.keys.sample
+        available_colors.keys.sample
       end
 
       def button_down(id)
