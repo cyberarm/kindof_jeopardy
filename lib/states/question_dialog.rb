@@ -9,7 +9,7 @@ module KindOfJeopardy
 
         stack(width: 1.0, height: 1.0, padding: LARGE_PADDING, background: QUESTION_BACKGROUND) do
           # @question.label
-          banner "Hello world, what is the meaning of the life and everything in general?", text_size: 96, width: 1.0, fill: true, padding: LARGE_PADDING, text_align: :center, text_v_align: :center
+          banner @question.question, text_size: 96, width: 1.0, fill: true, padding: LARGE_PADDING, text_align: :center, text_v_align: :center
         end
       end
 

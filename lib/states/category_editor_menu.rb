@@ -30,23 +30,15 @@ module KindOfJeopardy
             end
 
             stack(width: 1.0, fill: true, scroll: true, margin_top: LARGE_PADDING) do
-              available_categories.each do |category|
-                button category.name, width: 1.0
+              CATEGORIES.each do |category|
+                button category.name, width: 1.0 do
+                  pop_state
+                  push_state(States::CategoryEditor, category: category)
+                end
               end
             end
           end
         end
-      end
-
-      def available_categories
-        categories = []
-
-        Dir.glob("#{ROOT_PATH}/data/*.json").sort_by { |a| a.downcase }.each do |file|
-          categories << JSON.parse(File.read(file))
-        rescue JSON::ParserError
-        end
-
-        categories
       end
     end
   end

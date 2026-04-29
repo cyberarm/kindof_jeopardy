@@ -34,7 +34,7 @@ module KindOfJeopardy
                 button("", width: 1.0 / 6.0, height: 1.0, style_class: [:jeopardy_button], text_size: 18) do |btn|
                   dialog(CategorySelectionDialog, team: @context.categories[i], callback: ->(category) {
                     if category
-                      btn.value = category
+                      btn.value = category.name
                       @context.categories[i] = category
                     else
                       btn.value = ""

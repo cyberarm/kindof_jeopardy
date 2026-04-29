@@ -32,7 +32,38 @@ module KindOfJeopardy
     "black" => 0xff_000000
   }.freeze
 
+  CATEGORIES = []
+
   DEBUG = true
+
+  def self.load_categories!
+    categories = "#{ROOT_PATH}/data/categories.json"
+
+    CATEGORIES.clear
+
+    if File.exist?(categories)
+      array = JSON.parse(File.read(categories), symbolize_names: true)
+      categories = array.map { |hash| States::Game::Category.from_json(hash) }
+
+      CATEGORIES.push(*categories)
+    end
+  end
+
+  def self.save_categories!
+    pp CATEGORIES
+
+    categories = "#{ROOT_PATH}/data/categories.json"
+    categories_backup = "#{ROOT_PATH}/data/categories.json.bak"
+
+    # create backup
+    File.write(categories_backup, File.read(categories)) if File.exist?(categories)
+
+    # write changes
+    File.write(categories, JSON.pretty_generate(CATEGORIES))
+
+    # remove backup
+    File.delete(categories_backup) if File.exist?(categories_backup)
+  end
 end
 
 require_relative "lib/version"
@@ -49,6 +80,8 @@ require_relative "lib/states/team_dialog"
 require_relative "lib/states/question_dialog"
 require_relative "lib/states/setup_game"
 require_relative "lib/states/game"
+
+KindOfJeopardy.load_categories!
 
 if KindOfJeopardy::DEBUG
   KindOfJeopardy::Window.new(width: 1280, height: 800, fullscreen: false, resizable: true).show

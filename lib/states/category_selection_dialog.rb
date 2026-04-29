@@ -10,11 +10,11 @@ module KindOfJeopardy
           banner "Choose Category", width: 1.0, text_align: :center
 
           stack(width: 1.0, fill: true, scroll: true) do
-            25.times do |category|
+            CATEGORIES.each do |category|
               widget(width: 1.0, margin_top: PADDING, **THEME[:Button], **THEME[:jeopardy_button]) do
                 stack(width: 1.0) do
-                  subtitle "CATEGORY", width: 1.0, text_align: :center
-                  caption "DESCRIPTION"
+                  subtitle category.name, width: 1.0, text_align: :center
+                  caption category.description
                 end
               end.subscribe(:clicked_left_mouse_button) do
                 pop_state

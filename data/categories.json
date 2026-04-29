@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Traditional Hymns",
+    "description": "Traditional-like hymns",
+    "questions": [
+      {
+        "type": "text",
+        "uri": "q",
+        "question": "q",
+        "answer": "What is \"Traditional Hymns?\"",
+        "host_context": "q"
+      },
+      {
+        "type": "text",
+        "uri": "q",
+        "question": "This timeless hymn was written by a former slave ship captain.",
+        "answer": "What is \"Amazing Grace?\"",
+        "host_context": "Written by John Newton. Sung at the fall of the Berlin wall."
+      },
+      {
+        "type": "text",
+        "uri": "q",
+        "question": "The author of this hymn was inspired to write it while his ship was passing over the place where his daughters parished.",
+        "answer": "What is \"It Is Well with My Soul?\"",
+        "host_context": "Also known as \"When Peace, Like A River.\" Written by Horatio Spafford and composed by Philip Bliss."
+      },
+      {
+        "type": "text",
+        "uri": "q",
+        "question": "q",
+        "answer": "What is \"Abide with Me?\"",
+        "host_context": ""
+      },
+      {
+        "type": "text",
+        "uri": "q",
+        "question": "q",
+        "answer": "What is \"Be Thou My Vision?\"",
+        "host_context": ""
+      },
+      {
+        "type": "text",
+        "uri": "q",
+        "question": "This hymn, traditionally sung as a Christmas carol, was written by Isaac Watts.",
+        "answer": "What is \"Joy to the World?\"",
+        "host_context": ""
+      }
+    ]
+  }
+]

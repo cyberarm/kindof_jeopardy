@@ -12,7 +12,7 @@ module KindOfJeopardy
       end
       Category = Struct.new(:name, :description, :questions) do
         def self.from_json(hash)
-          raise NotImplementedError
+          Category.new(hash[:name], hash[:description], hash[:questions].map { |q| Question.from_json(q) })
         end
 
         def to_json(context = nil)
@@ -54,20 +54,6 @@ module KindOfJeopardy
         super
 
         @context = @options[:context]
-        # FIXME: don't overwrite the categories, once we have real categories to work with xD
-        @context.categories.each_with_index do |cat, i|
-          @context.categories[i] = Category.new(
-            "Super Secret",
-            "",
-            [
-              Question.new("text", "ZERO", "VALUE", "HINT"),
-              Question.new("text", "ZERO", "VALUE", "HINT"),
-              Question.new("text", "ZERO", "VALUE", "HINT"),
-              Question.new("text", "ZERO", "VALUE", "HINT"),
-              Question.new("text", "ZERO", "VALUE", "HINT")
-            ]
-          )
-        end
 
         flow(width: 1.0, height: 1.0, padding: HALF_PADDING, background: GAME_BACKGROUND) do
           @context.categories.each do |category|
@@ -85,8 +71,10 @@ module KindOfJeopardy
 
               # quiz item
               category.questions.each_with_index do |question, i|
+                next if i.zero?
+
                 # question.label.to_s
-                button @context.options[:"answer_score_row_#{i + 1}"] * @context.options[:score_multiplier], width: 1.0, fill: true, style_class: [:jeopardy_button] do |btn|
+                button @context.options[:"answer_score_row_#{i}"] * @context.options[:score_multiplier], width: 1.0, fill: true, style_class: [:jeopardy_button] do |btn|
                   btn.enabled = false
                   dialog(QuestionDialog, question: question, button: btn)
                 end
