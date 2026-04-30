@@ -14,7 +14,12 @@ module KindOfJeopardy
             push_state(States::SetupGame)
           end
 
-          button "Category Editor", width: 1.0, margin_top: PADDING do
+          button "Connect to Game", width: 1.0, margin_top: PADDING do
+            pop_state
+            push_state(States::GameDirectorMenu)
+          end
+
+          button "Category Editor", width: 1.0, margin_top: LARGE_PADDING do
             pop_state
             push_state(States::CategoryEditorMenu)
           end

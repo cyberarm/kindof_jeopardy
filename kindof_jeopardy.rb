@@ -8,6 +8,7 @@ end
 require "json"
 require "faker"
 require "async/websocket"
+require "serialport"
 
 module CyberarmEngine
   GUI_DEBUG = false
@@ -80,8 +81,23 @@ require_relative "lib/states/team_dialog"
 require_relative "lib/states/question_dialog"
 require_relative "lib/states/setup_game"
 require_relative "lib/states/game"
+require_relative "lib/states/game_director_menu"
 
 KindOfJeopardy.load_categories!
+
+# Cone Light mk2 as remotes test
+SerialPort.open("/dev/ttyACM2", 115200) do |serial|
+  sleep 0.001
+  serial.puts("help")
+  sleep 0.001
+  serial.puts("net_color 128 128 0 2 8")
+  sleep 0.001
+  serial.puts("memory_usage")
+
+  while (!serial.closed?)
+    pp serial.gets
+  end
+end
 
 if KindOfJeopardy::DEBUG
   KindOfJeopardy::Window.new(width: 1280, height: 800, fullscreen: false, resizable: true).show

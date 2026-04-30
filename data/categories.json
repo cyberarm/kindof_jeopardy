@@ -46,5 +46,149 @@
         "host_context": ""
       }
     ]
+  },
+  {
+    "name": "Abbreviations and Acronyms",
+    "description": "Not your usual 3 letter agencies",
+    "questions": [
+      {
+        "type": "text",
+        "uri": "",
+        "question": ".",
+        "answer": "What is \"Abbreviations and Acronyms?\"",
+        "host_context": ""
+      },
+      {
+        "type": "text",
+        "uri": "",
+        "question": "You use this abbreviation to say you'll return in a moment.",
+        "answer": "What is \"BRB?\"",
+        "host_context": "Be Right Back."
+      },
+      {
+        "type": "text",
+        "uri": "",
+        "question": "This non-ionizing, X-rayless, medical device can produce detailed scans of the brain.",
+        "answer": "What is \"MRI?\"",
+        "host_context": "Magnetic Resonance Imaging."
+      },
+      {
+        "type": "text",
+        "uri": "",
+        "question": "This american agency keeps tabs on the weather.",
+        "answer": "What is \"NOAA?\"",
+        "host_context": "National Oceanic and Atmospheric Administration."
+      },
+      {
+        "type": "text",
+        "uri": "",
+        "question": "Northern Ireland, Norway, and Greenland, are not members of this transnational organization.",
+        "answer": "What is the \"EU?\"",
+        "host_context": "European Union."
+      },
+      {
+        "type": "text",
+        "uri": "",
+        "question": "The FAA finds it rather disagreeable to direct this focused beam at aircraft.",
+        "answer": "What is \"LASER?\"",
+        "host_context": "Light Amplification by Stimulated Emission of Radiation."
+      }
+    ]
+  },
+  {
+    "name": "Narnian Characters",
+    "description": "Fawns, centaurs, oh my!",
+    "questions": [
+      {
+        "type": "text",
+        "uri": "",
+        "question": ".",
+        "answer": "What is \"Narnian Characters?\"",
+        "host_context": ""
+      },
+      {
+        "type": "text",
+        "uri": "",
+        "question": "She was the first human girl to enter Narnia.",
+        "answer": "Who is \"Polly?\"",
+        "host_context": "Polly Plum from The Magician's Nephew."
+      },
+      {
+        "type": "text",
+        "uri": "",
+        "question": "This man was the last king of Narnia.",
+        "answer": "Who is \"Tirian?\"",
+        "host_context": "King Tirian From The Last Battle. Decendent of Prince and King Caspian."
+      },
+      {
+        "type": "text",
+        "uri": "",
+        "question": "This creature first to meet the four Pevensie children.",
+        "answer": "What is a \"beaver?\" or Who is \"Mr. Beaver?\"",
+        "host_context": "The Lion the Witch and the Wardwrobe."
+      },
+      {
+        "type": "text",
+        "uri": "",
+        "question": "A sickly green creature enchanted this Narnia prince.",
+        "answer": "Who is \"Rilian?\"",
+        "host_context": "The Silver Chair."
+      },
+      {
+        "type": "text",
+        "uri": "",
+        "question": "Digory struck a bell and awoke this queen who had spoken the forbidden word.",
+        "answer": "Who is \"Jadis?\"",
+        "host_context": "Queen Jadis. a.k.a. The White Witch. From The Magician's Nephew."
+      }
+    ]
+  },
+  {
+    "name": "Biblical Figures",
+    "description": "That guy, and that girl, with spiky hair?",
+    "questions": [
+      {
+        "type": "text",
+        "uri": "",
+        "question": ".",
+        "answer": "What is \"Biblical Figures?\"",
+        "host_context": ""
+      },
+      {
+        "type": "text",
+        "uri": "",
+        "question": "This baby was the first born child of Adam and Eve.",
+        "answer": "Who is \"Cain?\"",
+        "host_context": "Genesis 4:1"
+      },
+      {
+        "type": "text",
+        "uri": "",
+        "question": "This woman of ill repute is listed in the genealogy of Jesus.",
+        "answer": "Who is \"Rahab?\"",
+        "host_context": "Joshua 2:1"
+      },
+      {
+        "type": "text",
+        "uri": "",
+        "question": "This man was the father of John who was the brother of James.",
+        "answer": "Who is \"Zebedee?\"",
+        "host_context": "Matthew 4:21"
+      },
+      {
+        "type": "text",
+        "uri": "",
+        "question": "This man told a widow that her jar of flour and jug of oil would not be used up.",
+        "answer": "Who is \"Elijah?\"",
+        "host_context": "1 Kings 17:7-16"
+      },
+      {
+        "type": "text",
+        "uri": "",
+        "question": "This man walked with God and did not see death.",
+        "answer": "Who is \"Enoch?\"",
+        "host_context": "Genesis 5:24"
+      }
+    ]
   }
 ]
