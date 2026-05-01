@@ -5,42 +5,42 @@
     "questions": [
       {
         "type": "text",
-        "uri": "q",
-        "question": "q",
+        "uri": "",
+        "question": ".",
         "answer": "What is \"Traditional Hymns?\"",
-        "host_context": "q"
+        "host_context": ""
       },
       {
         "type": "text",
-        "uri": "q",
+        "uri": "",
         "question": "This timeless hymn was written by a former slave ship captain.",
         "answer": "What is \"Amazing Grace?\"",
         "host_context": "Written by John Newton. Sung at the fall of the Berlin wall."
       },
       {
         "type": "text",
-        "uri": "q",
+        "uri": "",
         "question": "The author of this hymn was inspired to write it while his ship was passing over the place where his daughters parished.",
         "answer": "What is \"It Is Well with My Soul?\"",
         "host_context": "Also known as \"When Peace, Like A River.\" Written by Horatio Spafford and composed by Philip Bliss."
       },
       {
         "type": "text",
-        "uri": "q",
-        "question": "q",
+        "uri": "",
+        "question": "This hymn is set to Eventide and was written by Henry Francis Lyte.",
         "answer": "What is \"Abide with Me?\"",
         "host_context": ""
       },
       {
         "type": "text",
-        "uri": "q",
-        "question": "q",
+        "uri": "",
+        "question": "This hymn of Irish origin is sung to the tune \"Slane.\"",
         "answer": "What is \"Be Thou My Vision?\"",
         "host_context": ""
       },
       {
         "type": "text",
-        "uri": "q",
+        "uri": "",
         "question": "This hymn, traditionally sung as a Christmas carol, was written by Isaac Watts.",
         "answer": "What is \"Joy to the World?\"",
         "host_context": ""
