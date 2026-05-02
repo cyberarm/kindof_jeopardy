@@ -12,11 +12,11 @@ module KindOfJeopardy
           stack(width: 0.5, max_width: 480, height: 1.0, padding: PADDING) do
             banner "Setup Game", width: 1.0, text_align: :center
 
-            @play_button = button "Play", width: 1.0, margin_top: LARGE_PADDING, enabled: false do
+            @play_button = button "Host", width: 1.0, margin_top: LARGE_PADDING, enabled: false do
               pop_state
               attach_options_to_context
               pp @context
-              push_state(States::Game, context: @context)
+              push_state(States::GameDirector, context: @context)
             end
 
             button "Main Menu", width: 1.0, margin_top: LARGE_PADDING do
@@ -30,9 +30,9 @@ module KindOfJeopardy
 
             title "Categories", width: 1.0, text_align: :center
             flow(width: 1.0, height: 80) do
-              6.times do |i|
+              ITEMS_PER_ROW.times do |i|
                 button("", width: 1.0 / 6.0, height: 1.0, style_class: [:jeopardy_button], text_size: 18) do |btn|
-                  dialog(CategorySelectionDialog, team: @context.categories[i], callback: ->(category) {
+                  dialog(CategorySelectionDialog, context: @context, category: @context.categories[i], callback: ->(category) {
                     if category
                       btn.value = category.name
                       @context.categories[i] = category
@@ -80,11 +80,11 @@ module KindOfJeopardy
               end
               stack(width: 0.33) do
                 subtitle "Categories Guessable?", width: 1.0, text_align: :center, tip: "The category label will be hidden and players can attempt to guess the category for bonus points."
-                @categories_guessable = toggle_button width: 1.0
+                @categories_guessable = toggle_button width: 1.0, enabled: false
               end
               stack(width: 0.33) do
                 subtitle "Auto Acknowledge?", width: 1.0, text_align: :center, tip: "Whether the first player to push the button will immediately be able to try to answer it."
-                @auto_acknowledge = toggle_button width: 1.0
+                @auto_acknowledge = toggle_button width: 1.0, enabled: false
               end
             end
 
@@ -122,7 +122,7 @@ module KindOfJeopardy
               stack(width: 0.66, margin_left: LARGE_PADDING) do
                 subtitle "Game Controller", width: 1.0, text_align: :center
                 tagline "Displays", width: 1.0, text_align: :center
-                @game_controller_displays = list_box items: ["1", "2+", "networked"], width: 1.0 do |value|
+                @game_controller_displays = list_box items: ["1", "2+", "networked"], choose: "networked", enabled: false, width: 1.0 do |value|
                   case value
                   when "networked"
                     @game_controller_network_interface.enabled = true
@@ -136,13 +136,13 @@ module KindOfJeopardy
                 end
 
                 tagline "Network Interface", width: 1.0, text_align: :center
-                @game_controller_network_interface = list_box items: Socket.ip_address_list.select(&:ipv4_private?).map(&:ip_address), width: 1.0, enabled: false
+                @game_controller_network_interface = list_box items: Socket.ip_address_list.select(&:ipv4_private?).map(&:ip_address), width: 1.0
 
                 tagline "Network Port", width: 1.0, text_align: :center
-                @game_controller_network_port = edit_line DEFAULT_NETWORK_PORT, width: 1.0, enabled: false
+                @game_controller_network_port = edit_line DEFAULT_NETWORK_PORT, width: 1.0
 
                 tagline "Password", width: 1.0, text_align: :center
-                @game_controller_password = edit_line "", width: 1.0, type: :password, enabled: false
+                @game_controller_password = edit_line "", width: 1.0, type: :password
               end
             end
           end

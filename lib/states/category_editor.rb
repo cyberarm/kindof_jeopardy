@@ -101,7 +101,7 @@ module KindOfJeopardy
       def create_default_category
         c = Game::Category.new("", "", [])
 
-        6.times do
+        ITEMS_PER_ROW.times do
           c.questions << Game::Question.new("text", "", "", "", "")
         end
 

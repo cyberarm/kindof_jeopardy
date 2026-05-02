@@ -4,6 +4,9 @@ module KindOfJeopardy
       def setup
         super
 
+        @context = @options[:context]
+        @category = @options[:category]
+
         background 0xee_353535
 
         stack(fill: true, width: 0.5, max_width: 480, h_align: :center, padding: PADDING) do
@@ -11,6 +14,8 @@ module KindOfJeopardy
 
           stack(width: 1.0, fill: true, scroll: true) do
             CATEGORIES.each do |category|
+              next if @context.categories.any? { |c| c == category }
+
               widget(width: 1.0, margin_top: PADDING, **THEME[:Button], **THEME[:jeopardy_button]) do
                 stack(width: 1.0) do
                   subtitle category.name, width: 1.0, text_align: :center

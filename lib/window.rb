@@ -1,9 +1,20 @@
 module KindOfJeopardy
   class Window < CyberarmEngine::Window
+    attr_accessor :socket
+
     def setup
+      @socket = nil
+
       self.caption = KindOfJeopardy::NAME
+      # push_state(States::GameDirector)
       push_state(States::MainMenu)
       # push_state(States::Game)
+    end
+
+    def update
+      super
+
+      @socket&.update(0)
     end
 
     def needs_redraw?

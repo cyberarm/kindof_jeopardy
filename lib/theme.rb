@@ -61,7 +61,8 @@ module KindOfJeopardy
         background_nine_slice_color: 0x88_ff8800,
       },
       disabled: {
-        background: 0
+        background: 0,
+        background_nine_slice_color: 0x44_ff8800,
       }
     },
     ToggleButton: {
