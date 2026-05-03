@@ -75,6 +75,10 @@ require_relative "lib/theme"
 require_relative "lib/window"
 require_relative "lib/state"
 require_relative "lib/dialog"
+
+require_relative "lib/networking/server"
+require_relative "lib/networking/client"
+
 require_relative "lib/states/main_menu"
 require_relative "lib/states/pause_menu"
 require_relative "lib/states/category_editor_menu"
@@ -85,6 +89,7 @@ require_relative "lib/states/question_dialog"
 require_relative "lib/states/setup_game"
 require_relative "lib/states/game"
 require_relative "lib/states/game_director_menu"
+require_relative "lib/states/connecting"
 require_relative "lib/states/game_director"
 
 KindOfJeopardy.load_categories!

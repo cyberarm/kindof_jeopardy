@@ -6,11 +6,13 @@ module KindOfJeopardy
 
         @context = @options[:context] || States::Game::Context.new
 
-        @server = ENet::Server.new(host: "0.0.0.0", port: 56789, max_clients: 32, channels: 4)
+        @server = KindOfJeopardy::Networking::Server.new(host: "0.0.0.0", port: 56789, max_clients: 32, channels: 1)
         @server.use_compression(true)
         window.socket = @server
 
-        @clients = []
+        every(0.1) do
+          @server.broadcast(@context.to_json)
+        end
 
         background 0xff_353535
 
@@ -90,20 +92,6 @@ module KindOfJeopardy
               button "ACCEPT", padding: PADDING, height: 1.0
             end
           end
-        end
-      end
-
-      def setup_enet_server
-        def @server.on_connection(client)
-          pp [client]
-        end
-
-        def @server.on_packet_received(client, data, channel)
-          pp [client, data, channel]
-        end
-
-        def @server.on_disconnection(client)
-          pp [client, data, channel]
         end
       end
     end

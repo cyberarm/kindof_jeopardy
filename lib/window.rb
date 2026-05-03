@@ -14,7 +14,7 @@ module KindOfJeopardy
     def update
       super
 
-      @socket&.update(0)
+      @socket.update(0) if @socket
     end
 
     def needs_redraw?

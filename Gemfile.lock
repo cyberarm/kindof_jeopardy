@@ -1,6 +1,5 @@
-GIT
-  remote: https://github.com/cyberarm/ffi-enet.git
-  revision: ebb9e2070b3d9dd3bc4893dc074975138c6ba666
+PATH
+  remote: ../ffi-enet
   specs:
     ffi-enet (0.1.0)
       ffi (~> 1.15)

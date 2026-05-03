@@ -10,14 +10,14 @@ module KindOfJeopardy
           banner "Game Director Menu", width: 1.0, text_align: :center
 
           subtitle "Hostname", margin_top: LARGE_PADDING, width: 1.0, text_align: :center
-          edit_line "", width: 1.0 do
+          @hostname = edit_line "127.0.0.1", width: 1.0 do
           end
           subtitle "Port", width: 1.0, text_align: :center
-          edit_line DEFAULT_NETWORK_PORT, width: 1.0 do
+          @port = edit_line DEFAULT_NETWORK_PORT, width: 1.0 do
           end
           button "Connect", width: 1.0, margin_top: PADDING do
             pop_state
-            push_state(States::SetupGame)
+            push_state(States::Connecting, hostname: @hostname.value, port: @port.value.to_i)
           end
 
           button "Back", width: 1.0, margin_top: LARGE_PADDING do

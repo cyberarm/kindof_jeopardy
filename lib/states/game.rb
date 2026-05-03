@@ -32,7 +32,7 @@ module KindOfJeopardy
       # ID of category from Context, row index of question, array of
       Turn = Struct.new(:category_id, :row, :team_attempts, :accepted_team, :time) do
         def self.from_json(hash)
-          raise NotImplementedError
+          Turn.new(**hash)
         end
 
         def to_json(context = nil)
@@ -42,7 +42,12 @@ module KindOfJeopardy
 
       Context = Struct.new(:teams, :categories, :options, :turns) do
         def self.from_json(hash)
-          raise NotImplementedError
+          Context.new(
+            hash[:teams].map { |t| t ? Team.from_json(t) : t },
+            hash[:categories].map { |c| c ? Category.from_json(c) : c },
+            hash[:options],
+            hash[:turns].map { |t| t ? Turn.from_json(t) : t }
+          )
         end
 
         def to_json(context = nil)
