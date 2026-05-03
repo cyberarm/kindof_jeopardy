@@ -29,10 +29,26 @@ module KindOfJeopardy
         end
       end
 
-      # ID of category from Context, row index of question, array of
-      Turn = Struct.new(:category_id, :row, :team_attempts, :accepted_team, :time) do
+      # ID of category from Context, row index of question, array of team guesses, time taken from first acknowledging first team to fail out.
+      Turn = Struct.new(:category_id, :row, :team_attempts, :time) do
         def self.from_json(hash)
-          Turn.new(**hash)
+          Turn.new(
+            hash[:category_id],
+            hash[:row],
+            hash[:team_attempts].map { |ta| ta ? TeamAttempt.from_json(ta) : nil },
+            hash[:accepted_team_id],
+            hash[:time]
+          )
+        end
+
+        def to_json(context = nil)
+          to_h.to_json(context)
+        end
+      end
+      # ID of team guessing/guessed, status string: "wrong", "correct", and "active"
+      TeamAttempt = Struct.new(:team_id, :status) do
+        def self.from_json(hash)
+          TeamAttempt.new(**hash)
         end
 
         def to_json(context = nil)
@@ -43,10 +59,10 @@ module KindOfJeopardy
       Context = Struct.new(:teams, :categories, :options, :turns) do
         def self.from_json(hash)
           Context.new(
-            hash[:teams].map { |t| t ? Team.from_json(t) : t },
-            hash[:categories].map { |c| c ? Category.from_json(c) : c },
+            hash[:teams].map { |t| t ? Team.from_json(t) : nil },
+            hash[:categories].map { |c| c ? Category.from_json(c) : nil },
             hash[:options],
-            hash[:turns].map { |t| t ? Turn.from_json(t) : t }
+            hash[:turns].map { |t| t ? Turn.from_json(t) : nil }
           )
         end
 

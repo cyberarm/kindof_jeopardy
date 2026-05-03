@@ -10,7 +10,8 @@ module KindOfJeopardy
         @server.use_compression(true)
         window.socket = @server
 
-        every(0.1) do
+        # broadcast game state every n seconds so game viewers can "connect"
+        every(3_000) do
           @server.broadcast(@context.to_json)
         end
 
@@ -57,7 +58,7 @@ module KindOfJeopardy
                     category.questions.each_with_index do |question, i|
                       next unless i.positive?
 
-                      button "#{i}", width: 1.0, fill: true, text_size: 24, style_class: [:jeopardy_button]
+                      button @context.options[:"answer_score_row_#{i}"] * @context.options[:score_multiplier], width: 1.0, fill: true, text_size: 24, style_class: [:jeopardy_button]
                     end
                   end
                 end
@@ -79,8 +80,8 @@ module KindOfJeopardy
             @context.teams.each do |team|
               next unless team
 
-              # teams guessed
-              button(team.name, width: 96, height: 96, margin_left: HALF_PADDING, padding: HALF_PADDING, v_align: :center, tip: "TEAM NAME", background_nine_slice_color: TEAM_COLORS[team.color], background_nine_slice: NINE_SLICE_BACKGROUND, text_wrap: :word_wrap) do
+              # teams guessing
+              button("99999", width: 96, height: 96, text_size: 24, margin_left: HALF_PADDING, padding: HALF_PADDING, v_align: :center, tip: team.name, background_nine_slice_color: TEAM_COLORS[team.color], background_nine_slice: NINE_SLICE_BACKGROUND, text_wrap: :word_wrap) do
               end
             end
 
