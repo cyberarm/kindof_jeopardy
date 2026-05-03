@@ -56,13 +56,14 @@ module KindOfJeopardy
         end
       end
 
-      Context = Struct.new(:teams, :categories, :options, :turns) do
+      Context = Struct.new(:teams, :categories, :options, :turns, :state) do
         def self.from_json(hash)
           Context.new(
             hash[:teams].map { |t| t ? Team.from_json(t) : nil },
             hash[:categories].map { |c| c ? Category.from_json(c) : nil },
             hash[:options],
-            hash[:turns].map { |t| t ? Turn.from_json(t) : nil }
+            hash[:turns].map { |t| t ? Turn.from_json(t) : nil },
+            hash[:state]
           )
         end
 

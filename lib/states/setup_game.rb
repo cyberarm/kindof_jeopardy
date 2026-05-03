@@ -4,7 +4,7 @@ module KindOfJeopardy
       def setup
         super
 
-        @context = Game::Context.new(Array.new(MAX_TEAMS) { nil }, Array.new(MAX_CATEGORIES) { nil }, {}, [])
+        @context = Game::Context.new(Array.new(MAX_TEAMS) { nil }, Array.new(MAX_CATEGORIES) { nil }, {}, [], {})
 
         background 0xff_353535
 
