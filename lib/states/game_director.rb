@@ -46,32 +46,9 @@ module KindOfJeopardy
           end
 
           # game director team selection and question result
-          flow(width: 1.0, padding: PADDING, background: 0x44_00ff00) do
-
-            # clock
-            flow(width: 96 * 2, height: 96, margin_left: HALF_PADDING, padding: HALF_PADDING, v_align: :center, tip: "TEAM NAME", background_nine_slice_color: 0xaa_000000, background_nine_slice: NINE_SLICE_BACKGROUND) do
-              title "00:00", width: 1.0, height: 1.0, text_align: :center, text_v_align: :center
-            end
-
-            flow(fill: true)
-
-            # teams
-            @context.teams.each do |team|
-              next unless team
-
-              # teams guessing
-              button("99999", width: 96, height: 96, text_size: 24, margin_left: HALF_PADDING, padding: HALF_PADDING, v_align: :center, tip: team.name, background_nine_slice_color: TEAM_COLORS[team.color], background_nine_slice: NINE_SLICE_BACKGROUND, text_wrap: :word_wrap) do
-              end
-            end
-
-            # state controller
-            flow(fill: true, height: 96, padding: HALF_PADDING, v_align: :center) do
-              flow(fill: true)
-
-              button "REJECT", padding: PADDING, height: 1.0
-              button "ACCEPT", padding: PADDING, height: 1.0
-            end
+          @status_bar = flow(width: 1.0, padding: PADDING, background: 0x44_00ff00) do
           end
+          status_bar_default
         end
       end
 
@@ -133,6 +110,9 @@ module KindOfJeopardy
             tagline question.host_context, color: 0xaa_ffffff, width: 1.0, text_align: :center, margin_top: LARGE_PADDING
           end
         end
+
+        # state stuff
+        choose_question(question)
       end
 
       def add_turn(turn)
@@ -154,6 +134,47 @@ module KindOfJeopardy
         end
       end
 
+      # show team standings
+      def status_bar_default
+        @status_bar.clear do
+          # clock
+          flow(width: 96 * 2, height: 96, margin_left: HALF_PADDING, padding: HALF_PADDING, v_align: :center, tip: "TEAM NAME", background_nine_slice_color: 0xaa_000000, background_nine_slice: NINE_SLICE_BACKGROUND) do
+            title "00:00", width: 1.0, height: 1.0, text_align: :center, text_v_align: :center
+          end
+
+          flow(fill: true)
+
+          # teams
+          @context.teams.each do |team|
+            next unless team
+
+            # teams guessing
+            button("99999", width: 96, height: 96, text_size: 24, margin_left: HALF_PADDING, padding: HALF_PADDING, v_align: :center, tip: team.name, background_nine_slice_color: TEAM_COLORS[team.color], background_nine_slice: NINE_SLICE_BACKGROUND, text_wrap: :word_wrap) do
+            end
+          end
+
+          # state controller
+          flow(fill: true, height: 96, padding: HALF_PADDING, v_align: :center) do
+            flow(fill: true)
+
+            button "REJECT", padding: PADDING, height: 1.0
+            button "ACCEPT", padding: PADDING, height: 1.0
+          end
+        end
+      end
+
+      # show "READY" button
+      def status_bar_show_question
+      end
+
+      # show team selector
+      def status_bar_acknowledge_team
+      end
+
+      # show "Correct" and "Incorrect" buttons
+      def status_bar_answer_select
+      end
+
       def cone_light_net_color(color, node_or_group_id, is_group = false)
         color = color.is_a?(Gosu::Color) ? color : Gosu::Color.new(color)
         pp color
@@ -172,7 +193,9 @@ module KindOfJeopardy
       # :choose_question, :show_question, :ready_for_answers, :acknowledge_team, :, :reject_answer, :accept_answer
 
       def choose_question(question)
-
+        @context.state[:state] = :show_question
+        @context.state[:category_id] = @context.categories.index { |c| c&.questions&.include?(question) } || -1
+        @context.state[:question_id] = @context.categories.find { |c| c&.questions&.include?(question) }&.questions&.index(question) || -1
       end
 
       def ready_for_answers
